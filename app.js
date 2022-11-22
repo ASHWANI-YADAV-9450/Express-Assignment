@@ -4,14 +4,14 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// app.use(expressValidator())
 
 
 // import route
-const user = require("./routes/userRoute")
+const routes = require("./routes/index")
 
 
 
-app.use("/user",user)
+app.use("/",routes)
+// console.log(user)
 
 module.exports = app

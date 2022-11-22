@@ -5,16 +5,26 @@ const isAuthenticatedUser = async(req,res,next)=>{
         let { token } = req.headers;
         if(!token){
             res.status(400).json({
-                status:"Fail"
+                status:"Fail",
+                message: "token not found"
             })
             
         } else{
             try{
                 const userDetail = await user.findOne({_id:token})
-                req.user = userDetail
+                // console.log("userDetails",userDetail)
+                if(!userDetail){
+                  res.status(400).json({
+                    status: "Fail",
+                    message:"Invalid Id"
+                  })
+                } else{
+                  req.user = userDetail
+                }
+                // req.user = userDetail
                 
               }catch(error){
-                res.status(200).json({
+                res.status(400).json({
                   status: "Fail",
                   message: "incorrect creds try something "
                 })
