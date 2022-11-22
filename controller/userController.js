@@ -1,6 +1,7 @@
 const user = require("../model/userModel")
 const bcrypt = require("bcryptjs")
-const validate = require("../middleware/validator")
+const validate = require("../middleware/validator");
+const { header } = require("express-validator");
 
 
 //  Registration
@@ -56,8 +57,11 @@ const login = async(req,res)=>{
   try {
     var data = await user.findOne({ username: req.body.username })
     if (data) {
+      const  token  = data._id;
+      console.log("skndkk",token)
         if (await bcrypt.compare(req.body.password, data.password))
-            res.send({ result: "Login sucessfully", acccess_token: data._id })
+            res.send({ result: "Login sucessfully", acccess_token: token })
+            
         else
             res.status(404).send({ result: "Fail", message: "Invalid Username or Password" })
 
@@ -71,16 +75,16 @@ catch (error) {
 }
 }
 
-module.exports =  {register, login}
+// Get Api
+const getUser = async(req,res)=>{
+  try{
+    res.status(200).send(req.user)
+  }catch(error){
+    res.status(500).send({result:"Fail", message:"Internal server error"})
+  }
+}
 
-
-
-
-
-
-
-
-
+module.exports =  {register, login, getUser}
 
 
 
