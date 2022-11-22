@@ -14,7 +14,7 @@ const isAuthenticatedUser = async(req,res,next)=>{
                 req.user = userDetail
                 
               }catch(error){
-                res.status(200).json({
+                res.status(400).json({
                   status: "Fail",
                   message: "incorrect creds try something "
                 })
