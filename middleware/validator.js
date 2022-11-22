@@ -42,11 +42,5 @@ module.exports = {
 
 
 
-// return res.status(400).json({
-//   status:"fail",
-//   error: errors.message
-
-// })
-// }
 
 
