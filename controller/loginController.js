@@ -6,11 +6,11 @@ const bcrypt = require("bcryptjs");
 // APi for login
 const login = async(req,res)=>{
     try {
-      var data = await user.findOne({ username: req.body.username })
+      let data = await user.findOne({ username: req.body.username })
       if (data) {
         const  token  = data._id;
           if (await bcrypt.compare(req.body.password, data.password))
-              res.send({ result: "Login sucessfully", acccess_token: token })
+              res.status(200).send({ result: "Login sucessfully", acccess_token: token })
               
           else
               res.status(404).send({ result: "Fail", message: "Invalid Username or Password" })
