@@ -18,6 +18,6 @@ const tokenSchema = new mongoose.Schema({
       },
 })
 
-const expire_token = new mongoose.model(" access_token",tokenSchema);
+const expire_token = new mongoose.model("access_token",tokenSchema);
 
 module.exports= expire_token;

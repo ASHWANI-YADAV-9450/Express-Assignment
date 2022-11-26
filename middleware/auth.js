@@ -34,7 +34,7 @@ const isAuthenticatedUser = async(req,res,next)=>{
                     req.user = userDetail
                   }else{
                     try {
-                      let data =  await access_token.findOne({ _id: userDetail })
+                      let data =  await access_token.findOne({ user_id: userDetail })
                       // let data = userDetail
                       if (data) {
                           await data.delete()
