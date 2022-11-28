@@ -9,7 +9,7 @@ const md5 = require("md5");
  
 const register =  async(req,res)=>{
     try{
-      const {username, password, confirm, email,firstName, lastName,access_token} = req.body;
+      const {username, password, confirm, email,firstName, lastName,address, access_token} = req.body;
     // confirm password
     if(password !== confirm){
       res.status(401).json({
@@ -17,7 +17,7 @@ const register =  async(req,res)=>{
       })
     } else{
       const User = await user.create({
-        username,password,email,firstName,lastName,access_token
+        username,password,email,firstName,lastName,address,access_token
       })
       //Password hashing
       bcrypt.genSalt(10, (err, salt)=>{

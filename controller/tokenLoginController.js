@@ -12,9 +12,6 @@ const tokenLogin = async(req,res)=>{
             access_token: md5(data._id)
           });
           await tokenData.save()
-            // .then((result) => { res.send(result) })
-
-            // console.log("tokenData  ",tokenData)
 
             if (await bcrypt.compare(req.body.password, data.password)){
                 res.status(200).send({ result: "Login sucessfully", acccess_token: tokenData })
