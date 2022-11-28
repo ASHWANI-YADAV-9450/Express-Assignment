@@ -25,7 +25,21 @@ const userShema = new mongoose.Schema({
     lastName:{
         type:String,
         required:[true,"Please Enter Last Name"]
-    }
+    },
+    address:
+    [{
+        type:Array,
+        default:[],
+        type:mongoose.Schema.Types.ObjectId,
+        ref: "address"
+    }],
+    access_token:{
+        type:String
+    },
+    createdAt: {
+      type: Date,
+      default: Date.now,
+    },
 })
 
 const user = new mongoose.model("users",userShema);
