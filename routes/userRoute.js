@@ -8,7 +8,7 @@ const getUser = require("../controller/getUser");
 const login = require("../controller/loginController");
 const register = require("../controller/registerController");
 const tokenLogin = require("../controller/tokenLoginController");
-const { isAuthenticatedUser } = require("../middleware/auth");
+const isAuthenticatedUser = require("../middleware/jwt")
 const { userValidationRules } = require("../validator/validator");
 
 

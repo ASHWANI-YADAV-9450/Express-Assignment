@@ -12,9 +12,7 @@ const tokenSchema = new mongoose.Schema({
     },
       createdAt: {
         type: Date,
-        // default: Date.now ,
         default: new Date(Date.now() +  ( 60* 60 * 1000) ),
-        // let expiryDate2 = new Date(Date.now() + 2 * (60 * 60 * 1000) );
       },
 })
 
