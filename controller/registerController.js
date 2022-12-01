@@ -12,7 +12,7 @@ const register =  async(req,res)=>{
       const {username, password, confirm, email,firstName, lastName,address, access_token} = req.body;
     // confirm password
     if(password !== confirm){
-      res.status(401).json({
+      res.status(400).json({
         status:"Password not matched"
       })
     } else{
@@ -28,36 +28,41 @@ const register =  async(req,res)=>{
         const userId = save._id
       
       let data = await user.findOne(userId)
-      // let data = userId
-      if (data) {
-          data.access_token = md5(userId)
-          await data.save()
+      
+      // if (data) {
+      //     data.access_token = md5(userId)
+      //     await data.save()
 
-          res.status(201).json({
-            status:"success",
-            data:data
-          })
-      }
-      else
-          res.status(404).send({ result: "Fail", message: "Invalid ID" })
-       
+      //     res.status(200).json({
+      //       status:"success",
+      //       data:data
+      //     })
+      // }
+      // else
+      //     res.status(400).json({
+      //        status: "Fail", 
+      //        message: "Invalid ID" 
+      //       })
         })
       })
     }
     }catch(error){
       if(error.username){
-        res.status(401).send({ result: "Fail", message: "User Name is already in use" })
+        res.status(400).json({
+           status: "Fail",
+            message: "User Name is already in use" })
       } else if(error.email){
-        res.status(401).send({result: "Fail", message:"Email is already in use"})
+        res.status(400).json({
+          status: "Fail", 
+          message:"Email is already in use"})
       }
       else{
         res.status(400).json({
-          status:"fail",
-          error: error.message
+          status:"Fail",
+          message: error.message
     
         })
       }
-     
     }
   }
   module.exports = register

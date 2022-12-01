@@ -10,17 +10,25 @@ const login = async(req,res)=>{
       if (data) {
         const  token  = data._id;
           if (await bcrypt.compare(req.body.password, data.password))
-              res.status(200).send({ result: "Login sucessfully", acccess_token: token })
+              res.status(200).json({
+                 status: "Login sucessfully", 
+                 message: token })
               
           else
-              res.status(404).send({ result: "Fail", message: "Invalid Username or Password" })
+              res.status(400).json({
+                 status: "Fail", 
+                 message: "Invalid Username or Password" })
   
       }
       else
-          res.status(404).send({ result: "Fail", message: "Invalid Username or Password" })
+          res.status(400).json({
+             status: "Fail", 
+             message: "Invalid Username or Password" })
   }
-  catch (error) {
-      res.status(500).send({ result: "Fail", message: "Internal Server Error" })
+  catch (error){
+      res.status(500).json({
+         status: "Fail", 
+         message: "Internal Server Error" })
   }
   }
 
